@@ -16,14 +16,13 @@ int main() {
     struct node list;
 
 
-    addNode(1);
+    addNode(5);
     addNode(2);
     addNode(3);
-    addNode(4);
-    addNode(5);
     addNode(6);
+    addNode(4);
     addNode(7);
-    deleteNode(4);
+    addNode(1);
     printList();
 
 
@@ -45,13 +44,35 @@ void addNode(int value) {
         head = tail = newNode;
     }
     else {
-        struct node* newNode = (struct node*)malloc(sizeof(struct node));
-        newNode->value = value;
-        newNode->next = NULL;
+        struct node *index = head;
+        struct node *prev;
+        struct node *newNode = (struct node *) malloc(sizeof(struct node));
 
-        tail->next= newNode;
-
-        tail = newNode;
+        if (index->value > value) {
+            newNode->value = value;
+            newNode->next = index;
+            head = newNode;
+        }
+        else if (tail->value < value) {
+            newNode->value = value;
+            newNode->next = NULL;
+            tail->next = newNode;
+            tail = newNode;
+        }
+        else {
+            while (index != NULL) {
+                if (index->value > value) {
+                    newNode->value = value;
+                    newNode->next = index;
+                    prev->next = newNode;
+                    break;
+                }
+                else{
+                    prev = index;
+                    index = index->next;
+                }
+            }
+        }
     }
 }
 
