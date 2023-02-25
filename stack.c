@@ -38,7 +38,6 @@ void push(int value) {
     }
     else {
         struct stack *node = malloc(sizeof(struct stack));
-
         node->value = value;
         node->next = tail;
 
@@ -65,4 +64,5 @@ void print() {
         printf("%d\n",iterator->value);
         iterator = iterator->next;
     }
+    free(iterator);
 }
